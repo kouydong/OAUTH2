@@ -1,7 +1,7 @@
-package com.rest.oauth2.controller.common;
+package com.example.oauth.web.controller;
 
+import com.example.oauth.web.dto.OAuthTokenDto;
 import com.google.gson.Gson;
-import com.rest.oauth2.model.oauth2.OAuthToken;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.http.*;
@@ -13,16 +13,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/oauth2")
 public class Oauth2Controller {
 
+    // http://localhost:8081/oauth/authorize?client_id=testClientId&redirect_uri=http://localhost:8081/oauth2/callback&response_type=code&scope=read
+
     private final Gson gson;
     private final RestTemplate restTemplate;
 
+    // callback controller
     @GetMapping(value = "/callback")
-    public OAuthToken callbackSocial(@RequestParam String code) {
+    public OAuthTokenDto callbackSocial(@RequestParam String code) {
 
         String credentials = "testClientId:testSecret";
         String encodedCredentials = new String(Base64.encodeBase64(credentials.getBytes()));
@@ -39,13 +44,13 @@ public class Oauth2Controller {
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
         ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8081/oauth/token", request, String.class);
         if (response.getStatusCode() == HttpStatus.OK) {
-            return gson.fromJson(response.getBody(), OAuthToken.class);
+            return gson.fromJson(response.getBody(), OAuthTokenDto.class);
         }
         return null;
     }
 
     @GetMapping(value = "/token/refresh")
-    public OAuthToken refreshToken(@RequestParam String refreshToken) {
+    public OAuthTokenDto refreshToken(@RequestParam String refreshToken) {
 
         String credentials = "testClientId:testSecret";
         String encodedCredentials = new String(Base64.encodeBase64(credentials.getBytes()));
@@ -61,7 +66,7 @@ public class Oauth2Controller {
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
         ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8081/oauth/token", request, String.class);
         if (response.getStatusCode() == HttpStatus.OK) {
-            return gson.fromJson(response.getBody(), OAuthToken.class);
+            return gson.fromJson(response.getBody(), OAuthTokenDto.class);
         }
         return null;
     }

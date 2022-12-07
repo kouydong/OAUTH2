@@ -9,7 +9,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class OAuthToken {
+public class OAuthTokenDto {
     private String access_token;
     private String token_type;
     private String refresh_token;

@@ -1,10 +1,15 @@
-package com.rest.oauth2.repo;
+package com.example.oauth.domain.repository;
 
-import com.rest.oauth2.entity.User;
+import com.example.oauth.domain.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface UserJpaRepo extends JpaRepository<User, Long> {
-    Optional<User> findByUid(String email);
+public interface UserJpaRepo
+{
+
 }
+
+//public interface UserJpaRepo extends JpaRepository<User, Long> {
+//    Optional<User> findByUid(String email);
+//}

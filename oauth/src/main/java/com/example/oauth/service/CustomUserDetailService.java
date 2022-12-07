@@ -1,8 +1,9 @@
-package com.rest.oauth2.service.security;
+package com.example.oauth.service;
 
-import com.rest.oauth2.entity.User;
-import com.rest.oauth2.repo.UserJpaRepo;
+import com.example.oauth.domain.entity.User;
+import com.example.oauth.domain.repository.UserJpaRepo;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

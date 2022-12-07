@@ -1,4 +1,4 @@
-package com.rest.oauth2.entity;
+package com.example.oauth.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -15,14 +15,19 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Builder // builder를 사용할수 있게 합니다.
-@Entity // jpa entity임을 알립니다.
-@Getter // user 필드값의 getter를 자동으로 생성합니다.
-@NoArgsConstructor // 인자없는 생성자를 자동으로 생성합니다.
-@AllArgsConstructor // 인자를 모두 갖춘 생성자를 자동으로 생성합니다.
-@Table(name = "user") // 'user' 테이블과 매핑됨을 명시
+public class User {
+
+
+}
+/*
+@Builder
+@Entity
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "user")
 public class User implements UserDetails {
-    @Id // pk
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long msrl;
     @Column(nullable = false, unique = true, length = 50)
@@ -74,3 +79,4 @@ public class User implements UserDetails {
         return true;
     }
 }
+*/

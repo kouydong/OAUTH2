@@ -1,4 +1,4 @@
-package com.rest.oauth2.config;
+package com.example.oauth.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @RequiredArgsConstructor
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+/*
     private final CustomAuthenticationProvider authenticationProvider;
 
     @Override
@@ -28,4 +28,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().and()
                 .httpBasic();
     }
+ */
 }
