@@ -1,7 +1,7 @@
 package com.example.oauth2.config;
 
 import com.example.oauth2.domain.entity.UserInfo;
-import com.example.oauth2.domain.repository.UserJpaRepo;
+import com.example.oauth2.domain.repository.UserInfoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     private final PasswordEncoder passwordEncoder;
-    private final UserJpaRepo userJpaRepo;
+    private final UserInfoRepository userInfoRepository;
 
     @Override
     public Authentication authenticate(Authentication authentication) {
@@ -24,7 +24,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String name = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        UserInfo user = userJpaRepo.findByUid(name).orElseThrow(() -> new UsernameNotFoundException("user is not exists"));
+        UserInfo user = userInfoRepository.findByUid(name).orElseThrow(() -> new UsernameNotFoundException("user is not exists"));
 
         if (!passwordEncoder.matches(password, user.getPassword()))
             throw new BadCredentialsException("password is not valid");

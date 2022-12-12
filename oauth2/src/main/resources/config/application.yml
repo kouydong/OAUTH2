@@ -10,9 +10,9 @@ spring:
   #──────────────────────────────────────────────────────────────────────
   # 해당 설정은 Spring boot 2.6 이상과 Swagger 상의 문제를 해결 하기 위해 적용
   #──────────────────────────────────────────────────────────────────────
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
+#  mvc:
+#    pathmatch:
+#      matching-strategy: ant_path_matcher
   #──────────────────────────────────────────────────────────────────────
   # You can choose the default profile(local, dev, prod and so forth, which you defined the profiles)
   #──────────────────────────────────────────────────────────────────────
@@ -22,9 +22,9 @@ spring:
   config:
     import: "optional:configserver:"
 
-logging:
-  config:
-    classpath:config/logback-${spring.profiles.active}.xml
+#logging:
+#  config:
+#    classpath:config/logback-${spring.profiles.active}.xml
 #──────────────────────────────────────────────────────────────────────
 # Default Setting END
 #──────────────────────────────────────────────────────────────────────

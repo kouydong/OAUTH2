@@ -53,15 +53,26 @@ public class Oauth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-                .withClient("testClientId") //
-                .secret("testSecret") //
-                .redirectUris("http://localhost:8081/oauth2/callback") // 인증(로그인)완료 후 Redirect URI 설정
-                .authorizedGrantTypes("AUTHORIZATION_CODE") // 인증타입설정(AUTHORIZATION_CODE, IMPLICIT, PASSWORD CREDENTIAL, CLIENT_CREDENTIAL)
-                .scopes("name", "address", "contactNumber") // Access Token 으로 접근할 수 있는 Resource 범위
-                .accessTokenValiditySeconds(30000); // Access Token의 유효시간(초)
-//        clients.jdbc(dataSource).passwordEncoder(passwordEncoder);
+        clients.jdbc(dataSource).passwordEncoder(passwordEncoder);
     }
+
+// 스프링 시큐리티 메모리 유저 설정
+//    @Override
+//    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+//        clients.inMemory()
+//            .withClient("testClientId") //
+//            .secret("testSecret") //
+//            .redirectUris("http://localhost:8081/oauth2/callback") // 인증(로그인)완료 후 Redirect URI 설정
+//            .authorizedGrantTypes("authorization_code") // 인증타입설정(AUTHORIZATION_CODE, IMPLICIT, PASSWORD CREDENTIAL, CLIENT_CREDENTIAL)
+//            .scopes("read") // Access Token 으로 접근할 수 있는 Resource 범위
+//            .accessTokenValiditySeconds(30000); // Access Token의 유효시간(초)
+//    }
+
+
+
+
+
+
 
     /**
      * 토큰 정보를 DB를 통해 관리한다.
