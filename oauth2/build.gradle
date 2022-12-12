@@ -45,15 +45,16 @@ dependencies {
 	// 의존성 때문에 주입하긴 했는데 정확한 확인 필요
 	implementation 'org.glassfish.jaxb:jaxb-runtime'
 
-	// In-Memory DB
-	runtimeOnly 'com.h2database:h2'
-
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
+	// Maria DB
+	runtimeOnly 'org.postgresql:postgresql'
+
+	implementation group: 'com.google.code.gson', name: 'gson', version: '2.10'
 
 
 

@@ -18,10 +18,20 @@ Author : kouydong
 ## Environment
 - Java version : 17
 - Spring-boot version 2.7.6
-- DBS : JPA, H2(필요 시 향후 적용 예정)
+- DBS : JPA, POSTGRES
 - IDE tool : Intellij Community
 - Spring Oauth2
- 
+
+
+## Authentication Type
+| Authentication type  | Description  |
+|:--------------------:|:------------:|
+|  AUTHORIZATION_CODE  |   일반적인 방법    |
+|       IMPLICIT       |     내용정의     |
+| CREDENTIAL_PASSWORD  |     내용정의     |
+|  CLIENT_CREDENTIAL   |     내용정의     |
+
+
 ## Process flow 
 - Spring Boot Oauth2 – AuthorizationServer : DB처리, JWT 토큰 방식 적용
     - Document

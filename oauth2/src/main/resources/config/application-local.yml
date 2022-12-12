@@ -1,0 +1,51 @@
+#──────────────────────────────────────────────────────────────────────
+# Local Environment START
+#──────────────────────────────────────────────────────────────────────
+spring:
+  #──────────────────────────────────────────────────────────────────────
+  # Setting DataSource for local (Need to be changed into in-memory DBMS
+  #──────────────────────────────────────────────────────────────────────
+  datasource:
+    url: jdbc:postgresql://localhost:5432/authorization
+    username: kouydong
+    password: 1234
+    drive-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10           # Max Connection size 10개
+      connection-timeout: 5000        # Connection Timeout 시간 5초
+      connection-init-sql: SELECT 1   # Connection 초기 SQL
+      validation-timeout: 2000        # 유효성 Timeout 시간 2초
+      minimum-idle: 10
+      idle-timeout: 600000
+      max-lifetime: 1800000
+  #──────────────────────────────────────────────────────────────────────
+  # Setting the JPA Environment for local
+  #──────────────────────────────────────────────────────────────────────
+  jpa:
+    open-in-view: false
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+#──────────────────────────────────────────────────────────────────────
+# Setting the Server Port for local
+#──────────────────────────────────────────────────────────────────────
+server:
+  port: 8081
+#──────────────────────────────────────────────────────────────────────
+logging:
+  #──────────────────────────────────────────────────────────────────────
+  level:
+    org:
+      #──────────────────────────────────────────────────────────────────────
+      hibernate:
+        type: trace
+        SQL: info
+
+security:
+  oauth2:
+    jwt:
+      signkey: "fdsjlkfjslkfj9io3ujrklfsdjfl"

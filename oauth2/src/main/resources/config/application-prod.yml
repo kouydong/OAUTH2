@@ -1,0 +1,97 @@
+#──────────────────────────────────────────────────────────────────────
+# Production Environment START
+#──────────────────────────────────────────────────────────────────────
+spring:
+  #──────────────────────────────────────────────────────────────────────
+  # Setting the Springboot Admin for development
+  #──────────────────────────────────────────────────────────────────────
+  boot:
+    admin:
+      url: http://172.19.1.68:8080 # server  url
+      client:
+        url: http://172.19.1.68:8080
+        username: apti
+        password: '@monitor'
+        instance:
+          metadata:
+            user.name: apti
+            user.password: '@monitor'
+          service-url: http://34.64.240.208:8085 # client url
+          name: 'DEV-주차예약 API Server'
+  #──────────────────────────────────────────────────────────────────────
+  # 해당 설정은 Spring boot 2.6 이상과 Swagger 상의 문제를 해결 하기 위해 적용
+  #──────────────────────────────────────────────────────────────────────
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  #──────────────────────────────────────────────────────────────────────
+  # Setting DataSource for production
+  #──────────────────────────────────────────────────────────────────────
+  datasource:
+    url: jdbc:postgresql://34.64.85.181:5432/apti-dev?currentSchema=parking
+    username: apti
+    password: aptidev12#$
+    drive-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10           # Max Connection size 10개
+      connection-timeout: 5000        # Connection Timeout 시간 5초
+      connection-init-sql: SELECT 1   # Connection 초기 SQL
+      validation-timeout: 2000        # 유효성 Timeout 시간 2초
+      minimum-idle: 10
+      idle-timeout: 600000
+      max-lifetime: 1800000
+  #──────────────────────────────────────────────────────────────────────
+  # Setting the JPA Environment for production
+  #──────────────────────────────────────────────────────────────────────
+  jpa:
+    open-in-view: false
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQL10Dialect
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: false
+        show_sql: false
+#──────────────────────────────────────────────────────────────────────
+# Setting the Server Port for production
+#──────────────────────────────────────────────────────────────────────
+server:
+  port: 8085
+#──────────────────────────────────────────────────────────────────────
+# Setting Logging Level for production
+#──────────────────────────────────────────────────────────────────────
+logging:
+  #──────────────────────────────────────────────────────────────────────
+  # Setting classpath of Logback for production
+  #──────────────────────────────────────────────────────────────────────
+  config: classpath:logback-prod.xml
+  level:
+    org:
+      #──────────────────────────────────────────────────────────────────────
+      # Setting logging level of hibernate for production
+      #──────────────────────────────────────────────────────────────────────
+      hibernate:
+        type: trace
+        SQL: info
+#──────────────────────────────────────────────────────────────────────
+# Setting the Local APT-I API URL(Need to be set the Domain instead of IP
+#──────────────────────────────────────────────────────────────────────
+apti:
+  apiUri: http://34.64.221.108:8080/api/v2/common/user/information
+#──────────────────────────────────────────────────────────────────────
+# Production Environment END
+#──────────────────────────────────────────────────────────────────────
+
+#──────────────────────────────────────────────────────────────────────
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  info:
+    env:
+      enabled: true
+#──────────────────────────────────────────────────────────────────────

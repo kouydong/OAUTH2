@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>엑세스토큰</title>
+</head>
+<body>
+
+<form action="index.html" th:action method="post">
+    <div>
+        <label for="clientId">Client ID</label>
+        <input type="text" id="clientId" name="clientId">
+    </div>
+
+    <div>
+        <label for="clientSecret">Client Secret</label>
+        <input type="text" id="clientSecret" name="clientSecret">
+    </div>
+
+    <button onclick="location.href='index.html'"
+            type="button">전송</button>
+
+</form>
+</body>
+</html>

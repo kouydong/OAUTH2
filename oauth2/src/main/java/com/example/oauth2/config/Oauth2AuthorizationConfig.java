@@ -7,23 +7,28 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
 import javax.sql.DataSource;
 
 /**
- * id/password 기반 Oauth2 인증을 담당하는 서버
- * 다음 endpont가 자동 생성 된다.
- * /oauth/authorize
- * /oauth/token
+ * AuthorizationServerConfigurer 인터페이스의 3개의 메서드 구현 필요
+ * 1. void configure(AuthorizationServerSecurityConfigurer security) throws Exception
+ * 2. void configure(ClientDetailsServiceConfigurer clients) throws Exception;
+ * 3. void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception;
+ * @ahthor Ko Uy-dong
  */
+
+
 @RequiredArgsConstructor
 @Configuration
 @EnableAuthorizationServer
@@ -49,12 +54,12 @@ public class Oauth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient("testClientId")
-                .secret("testSecret")
-                .redirectUris("http://localhost:8081/oauth2/callback")
-                .authorizedGrantTypes("authorization_code")
-                .scopes("read", "write")
-                .accessTokenValiditySeconds(30000);
+                .withClient("testClientId") //
+                .secret("testSecret") //
+                .redirectUris("http://localhost:8081/oauth2/callback") // 인증(로그인)완료 후 Redirect URI 설정
+                .authorizedGrantTypes("AUTHORIZATION_CODE") // 인증타입설정(AUTHORIZATION_CODE, IMPLICIT, PASSWORD CREDENTIAL, CLIENT_CREDENTIAL)
+                .scopes("name", "address", "contactNumber") // Access Token 으로 접근할 수 있는 Resource 범위
+                .accessTokenValiditySeconds(30000); // Access Token의 유효시간(초)
 //        clients.jdbc(dataSource).passwordEncoder(passwordEncoder);
     }
 

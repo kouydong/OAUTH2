@@ -1,0 +1,60 @@
+#──────────────────────────────────────────────────────────────────────
+# Local Environment START
+#──────────────────────────────────────────────────────────────────────
+spring:
+  #──────────────────────────────────────────────────────────────────────
+  # Setting DataSource for local (Need to be changed into in-memory DBMS
+  #──────────────────────────────────────────────────────────────────────
+  datasource:
+    url: jdbc:postgresql://34.64.85.181:5432/apti-dev?currentSchema=parking
+    username: apti
+    password: aptidev12#$
+    drive-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10           # Max Connection size 10개
+      connection-timeout: 5000        # Connection Timeout 시간 5초
+      connection-init-sql: SELECT 1   # Connection 초기 SQL
+      validation-timeout: 2000        # 유효성 Timeout 시간 2초
+      minimum-idle: 10
+      idle-timeout: 600000
+      max-lifetime: 1800000
+  #──────────────────────────────────────────────────────────────────────
+  # Setting the JPA Environment for local
+  #──────────────────────────────────────────────────────────────────────
+  jpa:
+    open-in-view: false
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQL10Dialect
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+#──────────────────────────────────────────────────────────────────────
+# Setting the Server Port for local
+#──────────────────────────────────────────────────────────────────────
+server:
+  port: 8085
+#──────────────────────────────────────────────────────────────────────
+# Setting Logging Level for local
+#──────────────────────────────────────────────────────────────────────
+logging:
+  #──────────────────────────────────────────────────────────────────────
+  # Setting classpath of Logback for local
+  #──────────────────────────────────────────────────────────────────────
+  level:
+    org:
+      #──────────────────────────────────────────────────────────────────────
+      # Setting logging level of hibernate for local
+      #──────────────────────────────────────────────────────────────────────
+      hibernate:
+        type: trace
+        SQL: info
+#──────────────────────────────────────────────────────────────────────
+# Setting the Local APT-I API URL(Need to be set the Domain instead of IP
+#──────────────────────────────────────────────────────────────────────
+apti:
+  apiUri: http://34.64.221.108:8080/api/v2/common/user/information
+#──────────────────────────────────────────────────────────────────────
+# Local Environment END
+#──────────────────────────────────────────────────────────────────────

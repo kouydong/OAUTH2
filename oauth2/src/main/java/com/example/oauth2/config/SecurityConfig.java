@@ -6,6 +6,16 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+
+ /**
+  * 스프링 시큐리티 환경 설정
+  * 1. void configure(AuthorizationServerSecurityConfigurer security) throws Exception
+  * 2. void configure(ClientDetailsServiceConfigurer clients) throws Exception;
+  * 3. void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception;
+  *
+  * @ahthor Ko Uy-dong
+  *
+*/
 @RequiredArgsConstructor
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
